@@ -17,10 +17,6 @@ public class Brett {
         return whiteKing;
     }
 
-
-
-
-
     public Figur[][] getFigurs() {
         return figurs;
     }
@@ -59,7 +55,7 @@ public class Brett {
                         break;
                     case 1:
                     case 6:
-                        figurs[zeile][spalte] =new Bauer((zeile%2!=0?FigurFarbe.BLACK:FigurFarbe.WHITE),new Position1(zeile,spalte),this);
+                        figurs[zeile][spalte] =new Bauer((zeile == 1) ?FigurFarbe.BLACK:FigurFarbe.WHITE,new Position1(zeile,spalte),this);
                         break;
                     default:
                 };
@@ -68,15 +64,23 @@ public class Brett {
         }
     }
 
-    public void movePiece(Position1 start,Position1 end){
+    public boolean movePiece(Position1 start,Position1 end){
         if(start.getZeile()== end.getZeile()&& start.getSpalte()== end.getSpalte()){
-            return;
+            return false;
         }
         if(figurs[start.getZeile()][start.getSpalte()]!= null && figurs[start.getZeile()][start.getSpalte()].isValidMove(end,figurs))
         {
             figurs[end.getZeile()][end.getSpalte()]=figurs[start.getZeile()][start.getSpalte()];
             figurs[end.getZeile()][end.getSpalte()].setPosition(end);
             figurs[start.getZeile()][start.getSpalte()]=null;
+            return true;
         }
+        return false;
+    }
+
+    public boolean isKingchecked(FigurFarbe currentColor) {
+        Figur figur = currentColor ==FigurFarbe.BLACK ? blackKing :whiteKing;
+        // wenn Feld nicht sicher ist steht König im Schach
+        return !figur.isPositionSafe(figur.getPosition(),figurs);
     }
 }

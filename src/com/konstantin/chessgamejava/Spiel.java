@@ -9,35 +9,97 @@ public class Spiel {
     private Position1 positionStart;
     private Position1 positionEnd;
     private final Scanner sc = new Scanner(System.in);
-    private static boolean isKingChecked=false;
+    private static boolean checked=false;
+    private static boolean hasValidMoves=true;
 
-    public static boolean isIsKingChecked() {
-        return isKingChecked;
-    }
+
 
     public static void setIsKingChecked(boolean isKingChecked) {
-        Spiel.isKingChecked = isKingChecked;
+        Spiel.checked = isKingChecked;
     }
-
-
-
-
 
     public Spiel() {
 
         brett = new Brett();
+
+        // weiss fängt an
         turnWhite=true;
-        printSpielFeld();
     }
     public void spielen(){
+        printSpielFeld();
+        //Spielen schleife
         while(true){
-            Position1 start =eingabeStartposition();
-            Position1 end = eingabeEndPosition();
-            brett.movePiece(start,end);
-            printSpielFeld();
+            //bestimmen welches die eigene Farbe ist um zu schauen ob man selber im Schach steht
+            FigurFarbe currentColor =turnWhite ?FigurFarbe.WHITE :FigurFarbe.BLACK;
+            checked =brett.isKingchecked(currentColor);
+            if(checked) System.out.println("Schach");
+
+            // schauen ob der derzeitige spielerr gültige züge hat
+            if(hasNoValidMoves(currentColor)){
+                //wenn keine gültigen züge und schach = Schachmatt sonst Patt
+                if(checked){
+                    System.out.println("Schach Matt, Spieler "+currentColor+" hat gewonnen!");
+                }
+                else{
+                    System.out.println("Patt!");
+                }
+                break;
+            }
+
+            // gültigen Zug auf false setzten damit schleife anläuft
+            boolean validMove=false;
+            //Schleife checkt ob der Zug wirklich ausgeführt wird
+            while (!validMove){
+
+                // Liest start und Endposition ein
+                Position1 start =eingabeStartposition();
+                Position1 end = eingabeEndPosition();
+
+                // Führt den Zug nur aus wenn er gültig ist und gibt das als true / false zurück
+                validMove= brett.movePiece(start,end);
+
+                // Wenn Zug nicht ausgeführt wurde wird einem gesagt das der Zug nicht gültig ist.
+                if(!validMove){
+                    System.out.println("Üngultiger Zug bitte Zug wiederholen!");
+                }
+            }
+            // resettet checked wieder auf false
+            checked=false;
+
+            // wechselt Spielerfarbe
             turnWhite=!turnWhite;
         }
     }
+
+    private boolean hasNoValidMoves(FigurFarbe enemyColor) {
+        for (int i = 0; i <8 ; i++) {
+            for (int j = 0; j <8 ; j++) {
+                Figur figur =brett.getFigurs()[i][j];
+                if(figur!=null){
+                    if(figur.getFarbe()==enemyColor){
+                        for (int k = 0; k <8 ; k++) {
+                            {
+                                for (int l = 0; l <8 ; l++) {
+                                    Position1 enemyPosition =new Position1(k,l);
+                                    if(figur.isValidMove(enemyPosition, brett.getFigurs())){
+                                        // Einen Gültigen Zug gefunden
+                                        return false;
+                                    }
+                                }
+                            }
+
+                        }
+                    }
+
+                }
+
+            }
+
+        }
+        //keinen Gültigen Zug gefunden
+        return true;
+    }
+
     private Position1 eingabeEndPosition(){
 
         int zeileEnd=-1;
@@ -118,15 +180,25 @@ public class Spiel {
         return brett;
     }
 
+
+    // Spielfeld ausgeben
     public void printSpielFeld() {
+
+        // Spalten mit A-H beschriften
+        System.out.println("ABCDEFGH");
+
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 8; j++) {
                 if(brett.getFigurs()[i][j]==null){
-                    System.out.print("x");
+                    //Schachbrettmuster für nicht besetzte Felder
+                    char feld = (i+j)%2==0 ? ' ': '\u2591';
+                    System.out.print(feld);
                 }else{
                     System.out.print(brett.getFigurs()[i][j].getBezeichnung());
                 }
                }
+            // Zeilen mit 1-8 beschriften
+            System.out.print(" "+(i+1));
             System.out.printf("%n");
             }
         }

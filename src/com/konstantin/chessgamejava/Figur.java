@@ -35,7 +35,7 @@ public  class Figur {
     public boolean isValidMove(Position1 newPosition, Figur[][]figurs){
         return true;
     }
-    public boolean isNotCheck(Position1 newPosition, Figur[][]figurs) {
+    public boolean isPositionSafe(Position1 newPosition, Figur[][]figurs) {
         return true;
     }
     public boolean isMyKingNotCheck(Position1 newPosition,Figur[][]figurs){
@@ -47,14 +47,7 @@ public  class Figur {
         boolean notCheck=false;
         Figur myKing =(this.getFarbe()==FigurFarbe.BLACK) ?brett.getBlackKing():brett.getWhiteKing();
 
-        notCheck =myKing.isNotCheck(myKing.getPosition(),figurs);
-
-        if(notCheck){
-            Figur enemyKing =(this.getFarbe()==FigurFarbe.WHITE) ?brett.getBlackKing():brett.getWhiteKing();
-            Spiel.setIsKingChecked(enemyKing.isEnemyKingChecked(position,figurs));
-
-        }
-        figurs[position.getZeile()][position.getSpalte()] = startFigur;
+        notCheck =myKing.isPositionSafe(myKing.getPosition(),figurs);        figurs[position.getZeile()][position.getSpalte()] = startFigur;
         figurs[newPosition.getZeile()][newPosition.getSpalte()] =endFigur;
         if(!notCheck){
             System.out.println("Zug nicht ausführbar, ihr König würde im Schach stehen!");
