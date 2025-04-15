@@ -14,17 +14,20 @@ public class Spiel {
 
 
 
+    // Setzt König ins Schach
     public static void setIsKingChecked(boolean isKingChecked) {
         Spiel.checked = isKingChecked;
     }
 
     public Spiel() {
-
         brett = new Brett();
-
         // weiss fängt an
         turnWhite=true;
     }
+
+
+
+    // Simuliert das Spiel (Aktionen und Zugwechsel)
     public void spielen(){
         printSpielFeld();
         //Spielen schleife
@@ -63,7 +66,7 @@ public class Spiel {
                     System.out.println("Üngultiger Zug bitte Zug wiederholen!");
                 }
             }
-            // resettet checked wieder auf false
+            // resetet checked wieder auf false
             checked=false;
 
             // wechselt Spielerfarbe
@@ -71,17 +74,25 @@ public class Spiel {
         }
     }
 
-    private boolean hasNoValidMoves(FigurFarbe enemyColor) {
+
+    // Prüft ob der aktuelle Spieler noch gültige Züge hat
+    private boolean hasNoValidMoves(FigurFarbe currentColor) {
         for (int i = 0; i <8 ; i++) {
             for (int j = 0; j <8 ; j++) {
+
+
+                //geht SPielfeld ab und prüft auf welchem Feld eine eigene Figur steht
                 Figur figur =brett.getFigurs()[i][j];
                 if(figur!=null){
-                    if(figur.getFarbe()==enemyColor){
+                    if(figur.getFarbe()==currentColor){
+
+                        //Falls eigene Figur gefunden prüft er ob die Figur auf eines der 64 Felder des Spielfelds ziehen kann
                         for (int k = 0; k <8 ; k++) {
                             {
                                 for (int l = 0; l <8 ; l++) {
                                     Position1 enemyPosition =new Position1(k,l);
                                     if(figur.isValidMove(enemyPosition, brett.getFigurs())){
+
                                         // Einen Gültigen Zug gefunden
                                         return false;
                                     }
