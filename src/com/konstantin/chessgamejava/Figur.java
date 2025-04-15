@@ -1,7 +1,5 @@
 package com.konstantin.chessgamejava;
 
-import javax.swing.text.Position;
-
 public  class Figur {
     protected Position1 position;
     protected FigurFarbe farbe;

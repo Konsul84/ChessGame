@@ -31,12 +31,12 @@ public class Brett {
                             case 0:
                             case 7: figurs[zeile][spalte] =new Turm((zeile%2==0?FigurFarbe.BLACK:FigurFarbe.WHITE),new Position1(zeile,spalte),this);
                             break;
-                            case 1:
-                            case 6:
-                                figurs[zeile][spalte] =new Laufer((zeile%2==0?FigurFarbe.BLACK:FigurFarbe.WHITE),new Position1(zeile,spalte),this);
-                                break;
                             case 2:
                             case 5:
+                                figurs[zeile][spalte] =new Laufer((zeile%2==0?FigurFarbe.BLACK:FigurFarbe.WHITE),new Position1(zeile,spalte),this);
+                                break;
+                            case 1:
+                            case 6:
                                 figurs[zeile][spalte] =new Springer((zeile%2==0?FigurFarbe.BLACK:FigurFarbe.WHITE),new Position1(zeile,spalte),this);
                                 break;
                             case 3:

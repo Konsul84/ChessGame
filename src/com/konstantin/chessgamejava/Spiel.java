@@ -29,7 +29,6 @@ public class Spiel {
 
     // Simuliert das Spiel (Aktionen und Zugwechsel)
     public void spielen(){
-        printSpielFeld();
         //Spielen schleife
         while(true){
             //bestimmen welches die eigene Farbe ist um zu schauen ob man selber im Schach steht
@@ -53,7 +52,7 @@ public class Spiel {
             boolean validMove=false;
             //Schleife checkt ob der Zug wirklich ausgeführt wird
             while (!validMove){
-
+                printSpielFeld();
                 // Liest start und Endposition ein
                 Position1 start =eingabeStartposition();
                 Position1 end = eingabeEndPosition();
@@ -134,7 +133,7 @@ public class Spiel {
 
                 }
                 spalteEnd =(spalteChar-'a');
-                zeileEnd =7- Character.getNumericValue(zeileChar);
+                zeileEnd =8- Character.getNumericValue(zeileChar);
                 validEingabe=true;
             } catch (NumberFormatException e) {
                 System.out.println("Eigentlich deckt der Code alles ab so dass keien Exeption kommen könnte");
@@ -167,7 +166,7 @@ public class Spiel {
 
                 }
                 spalteStart =(spalteChar-'a');
-                zeileStart =7- Character.getNumericValue(zeileChar);
+                zeileStart =8- Character.getNumericValue(zeileChar);
 
                 Figur figur = brett.getFigurs()[zeileStart][spalteStart];
                 if(figur==null){
@@ -209,7 +208,7 @@ public class Spiel {
                 }
                }
             // Zeilen mit 1-8 beschriften
-            System.out.print(" "+(i+1));
+            System.out.print(" "+Math.abs(i-8));
             System.out.printf("%n");
             }
         }
