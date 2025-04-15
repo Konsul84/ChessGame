@@ -1,8 +1,8 @@
 package com.konstantin.chessgamejava;
 
 public class King extends Figur{
-    public King(FigurFarbe farbe,Position1 position) {
-        super(farbe,position);
+    public King(FigurFarbe farbe,Position1 position,Brett brett) {
+        super(farbe,position,brett);
         bezeichnung = farbe == FigurFarbe.BLACK ? 'K' : 'k';
     }
 
@@ -19,7 +19,7 @@ public class King extends Figur{
         }
         return false;
     }
-// Prüft ob König nach bewegung im Matt steht
+// Prüft ob König nach bewegung im Schach steht
 
     public boolean isNotCheck(Position1 newPosition, Figur[][]figurs) {
         boolean isValid =false;

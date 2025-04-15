@@ -6,14 +6,14 @@ public class Brett {
         figurs =new Figur[8][8];
                 setupFigur();
     }
-    private static Figur whiteKing;
-    private static Figur blackKing;
+    private Figur whiteKing;
+    private Figur blackKing;
 
-    public static Figur getBlackKing() {
+    public Figur getBlackKing() {
         return blackKing;
     }
 
-    public static Figur getWhiteKing() {
+    public Figur getWhiteKing() {
         return whiteKing;
     }
 
@@ -33,18 +33,18 @@ public class Brett {
                     case 7:
                         switch(spalte){
                             case 0:
-                            case 7: figurs[zeile][spalte] =new Turm((zeile%2==0?FigurFarbe.BLACK:FigurFarbe.WHITE),new Position1(zeile,spalte));
+                            case 7: figurs[zeile][spalte] =new Turm((zeile%2==0?FigurFarbe.BLACK:FigurFarbe.WHITE),new Position1(zeile,spalte),this);
                             break;
                             case 1:
                             case 6:
-                                figurs[zeile][spalte] =new Laufer((zeile%2==0?FigurFarbe.BLACK:FigurFarbe.WHITE),new Position1(zeile,spalte));
+                                figurs[zeile][spalte] =new Laufer((zeile%2==0?FigurFarbe.BLACK:FigurFarbe.WHITE),new Position1(zeile,spalte),this);
                                 break;
                             case 2:
                             case 5:
-                                figurs[zeile][spalte] =new Springer((zeile%2==0?FigurFarbe.BLACK:FigurFarbe.WHITE),new Position1(zeile,spalte));
+                                figurs[zeile][spalte] =new Springer((zeile%2==0?FigurFarbe.BLACK:FigurFarbe.WHITE),new Position1(zeile,spalte),this);
                                 break;
                             case 3:
-                                figurs[zeile][spalte] =new King((zeile%2==0?FigurFarbe.BLACK:FigurFarbe.WHITE),new Position1(zeile,spalte));
+                                figurs[zeile][spalte] =new King((zeile%2==0?FigurFarbe.BLACK:FigurFarbe.WHITE),new Position1(zeile,spalte),this);
                                 if(figurs[zeile][spalte].getFarbe()==FigurFarbe.BLACK){
                                     blackKing=figurs[zeile][spalte];
                                 }
@@ -53,13 +53,13 @@ public class Brett {
                                 }
                                 break;
                             case 4:
-                                figurs[zeile][spalte] =new Queen((zeile%2==0?FigurFarbe.BLACK:FigurFarbe.WHITE),new Position1(zeile,spalte));
+                                figurs[zeile][spalte] =new Queen((zeile%2==0?FigurFarbe.BLACK:FigurFarbe.WHITE),new Position1(zeile,spalte),this);
                                 break;
                         };
                         break;
                     case 1:
                     case 6:
-                        figurs[zeile][spalte] =new Bauer((zeile%2!=0?FigurFarbe.BLACK:FigurFarbe.WHITE),new Position1(zeile,spalte));
+                        figurs[zeile][spalte] =new Bauer((zeile%2!=0?FigurFarbe.BLACK:FigurFarbe.WHITE),new Position1(zeile,spalte),this);
                         break;
                     default:
                 };

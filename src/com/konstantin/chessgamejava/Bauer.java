@@ -1,8 +1,8 @@
 package com.konstantin.chessgamejava;
 
 public class Bauer extends Figur{
-    public Bauer(FigurFarbe farbe, Position1 position) {
-        super(farbe, position);
+    public Bauer(FigurFarbe farbe, Position1 position,Brett brett) {
+        super(farbe, position,brett);
         bezeichnung = farbe == FigurFarbe.BLACK ? 'B' : 'b';
 
     }

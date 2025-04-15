@@ -9,6 +9,7 @@ public class Spiel {
     private Position1 positionStart;
     private Position1 positionEnd;
     private final Scanner sc = new Scanner(System.in);
+    private static boolean isKingChecked=false;
 
     public static boolean isIsKingChecked() {
         return isKingChecked;
@@ -18,7 +19,7 @@ public class Spiel {
         Spiel.isKingChecked = isKingChecked;
     }
 
-    private static boolean isKingChecked=false;
+
 
 
 

@@ -6,11 +6,13 @@ public  class Figur {
     protected Position1 position;
     protected FigurFarbe farbe;
     protected char bezeichnung;
+    protected Brett brett;
 
 
-    public Figur (FigurFarbe farbe, Position1 position){
+    public Figur (FigurFarbe farbe, Position1 position, Brett brett){
         this.position=position;
         this.farbe=farbe;
+        this.brett=brett;
         bezeichnung=farbe==FigurFarbe.BLACK ? Character.toUpperCase(getBezeichnung()):getBezeichnung();
     }
 
@@ -43,12 +45,12 @@ public  class Figur {
         figurs[position.getZeile()][position.getSpalte()] =null;
 
         boolean notCheck=false;
-        Figur myKing =(this.getFarbe()==FigurFarbe.BLACK) ?Brett.getBlackKing():Brett.getWhiteKing();
+        Figur myKing =(this.getFarbe()==FigurFarbe.BLACK) ?brett.getBlackKing():brett.getWhiteKing();
 
         notCheck =myKing.isNotCheck(myKing.getPosition(),figurs);
 
         if(notCheck){
-            Figur enemyKing =(this.getFarbe()==FigurFarbe.WHITE) ?Brett.getBlackKing():Brett.getWhiteKing();
+            Figur enemyKing =(this.getFarbe()==FigurFarbe.WHITE) ?brett.getBlackKing():brett.getWhiteKing();
             Spiel.setIsKingChecked(enemyKing.isEnemyKingChecked(position,figurs));
 
         }

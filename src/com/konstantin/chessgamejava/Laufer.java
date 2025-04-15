@@ -3,8 +3,8 @@ package com.konstantin.chessgamejava;
 import javax.swing.text.Position;
 
 public class Laufer extends Figur{
-    public Laufer(FigurFarbe farbe,Position1 position) {
-        super(farbe,position);
+    public Laufer(FigurFarbe farbe,Position1 position,Brett brett) {
+        super(farbe,position,brett);
         bezeichnung = farbe == FigurFarbe.BLACK ? 'L' : 'l';
     }
 
