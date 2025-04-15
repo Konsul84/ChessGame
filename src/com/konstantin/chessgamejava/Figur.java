@@ -55,9 +55,7 @@ public  class Figur {
         return notCheck;
     }
 
-    public boolean isEnemyKingChecked(Position1 position, Figur[][] figurs) {
-        return false;
-    }
+
 
 
 
