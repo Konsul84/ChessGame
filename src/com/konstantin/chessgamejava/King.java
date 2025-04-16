@@ -58,12 +58,17 @@ public class King extends Figur{
 // Prüft ob König nach bewegung im Schach steht
 
     public boolean isPositionSafe(Position1 newPosition, Figur[][]figurs) {
-        boolean isValid =false;
         for (int zeile = 0; zeile <8 ; zeile++) {
             for (int spalte = 0; spalte < 8; spalte++) {
                 Figur figur = figurs[zeile][spalte];
+
                 if (figur != null && figur.getFarbe() != this.getFarbe()) {
-                    isValid = figur.isValidMove(newPosition, figurs);
+
+                    //Gegnerischen König beim Sicherheitscheck ignorieren, um Endlosschleife zu vermeiden
+                    if(figur instanceof King) continue;
+
+                    boolean isValid = figur.isValidMove(newPosition, figurs);
+
                     // Gegner kann mich schlagen , Schach
                     if (isValid) return false;
                 }
