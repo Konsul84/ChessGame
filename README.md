@@ -1,71 +1,58 @@
-♟ ChessGame
+# ♟ ChessGame
 
-Ein objektorientiertes Schachspiel in Java. Ziel ist es, die komplette Spiellogik korrekt umzusetzen, inklusive Zugprüfung, Schach-/Schachmatt-Erkennung und späterer Erweiterung um eine GUI.
+Ein objektorientiertes Schachspiel in Java – komplett selbst umgesetzt von Grund auf.  
+Ziel war es, die **komplette Spiellogik korrekt und regelkonform** zu implementieren – inklusive Spezialregeln wie **Schach, Schachmatt, Patt, Rochade und En Passant**.
 
-Hinweis: Diese README wurde mithilfe von KI erstellt und anschließend manuell angepasst.
+> ℹ️ Hinweis: Dies ist mein **erstes vollständiges Softwareprojekt**. Ich habe es bewusst mit Versionsverwaltung (Git + GitHub) und Dokumentation aufgebaut, um **sauberes Arbeiten in realen Projekten zu lernen und zu üben**.
 
-✨ Features (Stand: aktuell)
+---
 
-✅ Bereits implementiert
+## ✨ Features (Stand: April 2025)
 
-Vollständige Figurenklassen: Turm, Läufer, Springer, Dame, König, Bauer
+### ✅ Bereits implementiert
 
-Objektorientierte Struktur mit Vererbung für Figur
+- Alle Figurenklassen: `Bauer`, `Springer`, `Läufer`, `Turm`, `Dame`, `König`
+- Vollständige Zuglogik (`isValidMove()` individuell pro Figur)
+- Königsschutz: Züge, die ins eigene Schach führen, werden verhindert
+- Schach-/Schachmatt-/Patt-Erkennung (regelkonform)
+- En Passant (spezielle Schlagregel für Bauern)
+- Rochade (kurz/lang mit allen Bedingungen)
+- Farbunterscheidung per Groß-/Kleinbuchstaben (schwarz = groß, weiß = klein)
+- Kompletter Ablauf über Konsole steuerbar
 
-isValidMove() implementiert für alle Figuren
+---
 
-Königsschutz: isMyKingNotCheck(Position1, figurs) verhindert ungültige Züge
+## ⚖️ Klassenstruktur (Auszug)
 
-Schacherkennung: isEnemyKingChecked(...) erkennt, ob der Gegner im Schach steht
+- `Figur` — abstrakte Oberklasse für alle Spielfiguren
+- `Bauer`, `Turm`, `Springer`, `Läufer`, `Dame`, `King` — konkrete Figurenklassen
+- `Brett` — enthält `Figur[][]`, Zuglogik, Königsspeicherung
+- `Spiel` — Spielsteuerung inkl. Spielerwechsel, Eingabe, Spielende
+- `Position1` — einfache Koordinatenklasse
 
-Initiale Brettaufstellung mit richtiger Positionierung aller Figuren
+---
 
-Farbunterscheidung per Klein-/Großbuchstabe (weiß = klein, schwarz = groß)
+## ▶️ Projekt ausführen (lokal)
 
-❌ Noch nicht implementiert / in Arbeit
+1. Projekt mit **IntelliJ IDEA** oder einer anderen Java-IDE öffnen
+2. Datei `Main.java` starten
+3. Spiel startet über Konsolenausgabe (Zug-Eingabe über Text)
 
-En Passant für Bauern
+---
 
-Rochade (inkl. Bedingungen: Turm und König nicht bewegt, keine Schachstellung)
+## ❌ Noch offen (optional / geplante Erweiterungen)
 
-Vollständige Schachmatt- und Patt-Erkennung
+- Methodenkommentare und JavaDoc vervollständigen
+- Wiederverwendbare Logik zentralisieren (Refactoring)
 
-GUI (z. B. mit JavaFX oder Swing)
+---
 
-Zug-Historie und Rücknahmefunktion (Undo)
+## 👨‍💻 Autor
 
-Zeitkontrolle, Spielzüge anzeigen, Mehrspielermodus
+- **Projekt:** ChessGame
+- **Sprache:** Java
+- **Status:** Abgeschlossen (Konsolen-Variante)
+- **Entwickler:** Konstantin Klein
+- **GitHub:** [github.com/Konsul84/ChessGame](https://github.com/Konsul84/ChessGame)
 
-⚖️ Klassenstruktur (Auszug)
-
-Figur — abstrakte Oberklasse aller Figuren
-
-Turm, Läufer, Springer, Dame, King, Bauer — konkrete Spielfiguren mit eigener isValidMove()-Logik
-
-Brett — Spielbrett mit Figur[][] figurs, Initialisierung & Zugriff auf whiteKing / blackKing
-
-Spiel — Hauptspielsteuerung, erkennt Schach/Schachmatt (teilweise vorbereitet)
-
-Position1 — einfache Wrapperklasse für Koordinaten
-
-🔄 Geplante Erweiterungen
-
-
-
-▶️ Projekt ausführen (lokal)
-
-Projekt in IntelliJ IDEA öffnen
-
-Main.java ausführen
-
-Züge aktuell über Konsolenausgabe/Tests sichtbar
-
-👨‍💻 Autor
-
-Projekt: ChessGame
-
-Sprache: Java
-
-Erstes größeres Projekt von: Konstantin Klein
-
-GitHub: https://github.com/Konsul84/ChessGame
+---

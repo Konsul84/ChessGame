@@ -18,19 +18,19 @@
 - [x] `movePiece(...)` strukturell verbessern → Nur Spiellogik dort, keine Logikverzweigungen
 - [ ] Methoden dokumentieren / auskommentieren (besonders: `isValidMove()`, `isMyKingNotCheck()`)
 - [ ] Doppelte/ähnliche Logik zentralisieren, wo sinnvoll
+- [ ] Refactoring: Wiederverwendbare Logik auslagern, Methoden kürzen, Lesbarkeit erhöhen
 
 ## 🧪 Spielabschluss prüfen
 
-- [ ] Methode schreiben: `hasNoValidMoves(currentColor)` zur Prüfung auf Patt oder Matt
+- [x] Methode schreiben: `hasNoValidMoves(currentColor)` zur Prüfung auf Patt oder Matt
 - [x] Bei jedem Zug prüfen, ob das Spiel zu Ende ist
 - [x] Klarer Spielausgang: Schachmatt, Patt (Konsolenausgabe reicht)
 
 ## 🧹 Aufräumen
 
 - [x] Unbenutzte Methoden entfernen (`isEnemyKingChecked`, wenn nicht genutzt)
-- [ ] Debug-Ausgaben durch sinnvolle `System.out.println(...)` ersetzen
 - [ ] README.md finalisieren mit kurzer Anleitung + Übersicht
 
-- [ ] ➡️ Aktuelles Ziel: **Funktionierendes, testbares, sauberes Konsolen-Schachspiel** ✅
+- [x] ➡️ Aktuelles Ziel: **Funktionierendes, testbares, sauberes Konsolen-Schachspiel** ✅
 
 TODO.md erstellt mit ChatGPT

@@ -78,11 +78,4 @@ public class King extends Figur{
         return true;
     }
 
-    public boolean isEnemyKingChecked(Position1 kingPosition,Figur[][]figurs){
-        if(!isPositionSafe(kingPosition,figurs)) {
-            System.out.println("Gegnerischer König steht im Schach");
-            return true;
-        }
-        return false;
-    }
 }
