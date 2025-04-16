@@ -2,12 +2,31 @@ package com.konstantin.chessgamejava;
 
 public class Brett {
     private Figur [][] figurs;
-    public Brett(){
-        figurs =new Figur[8][8];
-                setupFigur();
+
+
+
+    private Position1 enPassant=null;
+
+    public void setEnPassantPawn(Figur enPassantPawn) {
+        this.enPassantPawn = enPassantPawn;
     }
+
+    private Figur enPassantPawn=null;
     private Figur whiteKing;
     private Figur blackKing;
+
+    public Brett(){
+        figurs =new Figur[8][8];
+        setupFigur();
+
+    }
+    public Position1 getEnPassant() {
+        return enPassant;
+    }
+
+    public void setEnPassant(Position1 enPassant) {
+        this.enPassant = enPassant;
+    }
 
     public Figur getBlackKing() {
         return blackKing;
@@ -68,6 +87,24 @@ public class Brett {
         if(start.getZeile()== end.getZeile()&& start.getSpalte()== end.getSpalte()){
             return false;
         }
+
+        // Prüft ob eine Bauer per enPassant schlagen darf (spezielle Abhandlung vo en Passant reset)
+        if(figurs[start.getZeile()][start.getSpalte()]!=null &&figurs[start.getZeile()][start.getSpalte()] instanceof Bauer && enPassant!=null&&
+                enPassant.equals(end)&&figurs[start.getZeile()][start.getSpalte()].isValidMove(end,figurs)){
+            figurs[end.getZeile()][end.getSpalte()]=figurs[start.getZeile()][start.getSpalte()];
+            figurs[end.getZeile()][end.getSpalte()].setPosition(end);
+            figurs[start.getZeile()][start.getSpalte()]=null;
+            enPassant=null;
+            enPassantPawn=null;
+            //entferne den gegnerischen Bauern
+            int gegnerzeile =figurs[start.getZeile()][start.getSpalte()].getFarbe()==FigurFarbe.WHITE ?-1:1;
+            figurs[end.getZeile()+gegnerzeile][end.getSpalte()]=null;
+            return true;
+
+        }
+        // setzt enpassant Information zurück (nach jedem Zug)
+        enPassant=null;
+        enPassantPawn=null;
         if(figurs[start.getZeile()][start.getSpalte()]!= null && figurs[start.getZeile()][start.getSpalte()].isValidMove(end,figurs))
         {
             figurs[end.getZeile()][end.getSpalte()]=figurs[start.getZeile()][start.getSpalte()];
@@ -80,7 +117,7 @@ public class Brett {
 
     public boolean isKingchecked(FigurFarbe currentColor) {
         Figur figur = currentColor ==FigurFarbe.BLACK ? blackKing :whiteKing;
-        // wenn Feld nicht sicher ist steht König im Schach
+       // Gibt true zurück, wenn der König im Schach steht (Feld ist nicht sicher)
         return !figur.isPositionSafe(figur.getPosition(),figurs);
     }
 }
