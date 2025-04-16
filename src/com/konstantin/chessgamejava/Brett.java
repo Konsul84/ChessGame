@@ -84,32 +84,81 @@ public class Brett {
     }
 
     public boolean movePiece(Position1 start,Position1 end){
+
+        // kein Zug auf gleiche Position erlaubg
         if(start.getZeile()== end.getZeile()&& start.getSpalte()== end.getSpalte()){
             return false;
         }
 
-        // Prüft ob eine Bauer per enPassant schlagen darf (spezielle Abhandlung vo en Passant reset)
-        if(figurs[start.getZeile()][start.getSpalte()]!=null &&figurs[start.getZeile()][start.getSpalte()] instanceof Bauer && enPassant!=null&&
-                enPassant.equals(end)&&figurs[start.getZeile()][start.getSpalte()].isValidMove(end,figurs)){
-            figurs[end.getZeile()][end.getSpalte()]=figurs[start.getZeile()][start.getSpalte()];
+
+        // Zugriff auf die Figur am Startfeld
+        Figur figur = figurs[start.getZeile()][start.getSpalte()];
+
+        // En Passant – Sonderfall für Bauern, die im letzten Zug um zwei Felder gezogen wurden
+        if(figur !=null &&figur instanceof Bauer && enPassant!=null&&
+                enPassant.equals(end)&&figur.isValidMove(end,figurs)){
+
+            //bewege Bauern auf EnPassant Feld
+            figurs[end.getZeile()][end.getSpalte()]=figur;
             figurs[end.getZeile()][end.getSpalte()].setPosition(end);
-            figurs[start.getZeile()][start.getSpalte()]=null;
+            figurs[start.getZeile()][start.getSpalte()] = null;
+
+
+            //En Passant Zustände zurücksetzen
             enPassant=null;
             enPassantPawn=null;
+
+
             //entferne den gegnerischen Bauern
             int gegnerzeile =figurs[start.getZeile()][start.getSpalte()].getFarbe()==FigurFarbe.WHITE ?-1:1;
+            figur.setToMoved();
             figurs[end.getZeile()+gegnerzeile][end.getSpalte()]=null;
+
             return true;
 
         }
-        // setzt enpassant Information zurück (nach jedem Zug)
+
+        // setzt En-Passant-Zustand nach jedem regulären oder Sonderzug zurück,
+        // damit En Passant nur direkt im nächsten Zug genutzt werden kann
+
         enPassant=null;
         enPassantPawn=null;
-        if(figurs[start.getZeile()][start.getSpalte()]!= null && figurs[start.getZeile()][start.getSpalte()].isValidMove(end,figurs))
-        {
-            figurs[end.getZeile()][end.getSpalte()]=figurs[start.getZeile()][start.getSpalte()];
+
+        // Rochade: König bewegt sich exakt zwei Felder seitlich
+        int spaltendiff= start.getSpalte()- end.getSpalte();
+        if(figur!=null &&figurs[start.getZeile()][start.getSpalte()] instanceof King && Math.abs(spaltendiff)==2
+        &&figur.isValidMove(end,figurs)){
+
+            //König wird gezogen
+            figurs[end.getZeile()][end.getSpalte()]=figur;
             figurs[end.getZeile()][end.getSpalte()].setPosition(end);
-            figurs[start.getZeile()][start.getSpalte()]=null;
+            figurs[start.getZeile()][start.getSpalte()] = null;
+            figur.setToMoved();
+
+            //kurze Rochade rechts
+            if(spaltendiff<0){
+                Figur tempTurm=figurs[end.getZeile()][7];
+                figurs[end.getZeile()][7]=null;
+                figurs[end.getZeile()][5]=tempTurm;
+                tempTurm.setToMoved();
+            }
+
+            //lange Rochade links
+            else{
+                Figur tempTurm=figurs[end.getZeile()][0];
+                figurs[end.getZeile()][0]=null;
+                figurs[end.getZeile()][3]=tempTurm;
+                tempTurm.setToMoved();
+            }
+        }
+
+        //Normaler Zug ohne SOnderregeln / Gültiger Zug
+        if(figur!= null && figurs[start.getZeile()][start.getSpalte()].isValidMove(end,figurs))
+        {
+            figurs[end.getZeile()][end.getSpalte()]=figur;
+            figurs[end.getZeile()][end.getSpalte()].setPosition(end);
+            figurs[start.getZeile()][start.getSpalte()] = null;
+            figur.setToMoved();
             return true;
         }
         return false;

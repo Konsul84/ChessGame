@@ -9,7 +9,6 @@ public class Turm extends Figur{
 
     }
 
-
     @Override
     public boolean isValidMove(Position1 newPosition, Figur[][] figurs) {
         if (newPosition.getZeile() < 0 || newPosition.getZeile() > 7 ||

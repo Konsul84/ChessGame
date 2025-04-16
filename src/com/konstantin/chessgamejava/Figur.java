@@ -5,7 +5,7 @@ public  class Figur {
     protected FigurFarbe farbe;
     protected char bezeichnung;
     protected Brett brett;
-
+    protected boolean notMoved=true;
 
     public Figur (FigurFarbe farbe, Position1 position, Brett brett){
         this.position=position;
@@ -36,7 +36,16 @@ public  class Figur {
     public boolean isPositionSafe(Position1 newPosition, Figur[][]figurs) {
         return true;
     }
-    public boolean isMyKingNotCheck(Position1 newPosition,Figur[][]figurs){
+
+    public boolean isNotMoved() {
+        return notMoved;
+    }
+
+    public void setToMoved() {
+        notMoved = false;
+    }
+
+    public boolean isMyKingNotCheck(Position1 newPosition, Figur[][]figurs){
         Figur startFigur =figurs[position.getZeile()][position.getSpalte()];
         Figur endFigur =figurs[newPosition.getZeile()][newPosition.getSpalte()];
         figurs[newPosition.getZeile()][newPosition.getSpalte()] =startFigur;

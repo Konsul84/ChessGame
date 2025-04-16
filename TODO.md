@@ -7,8 +7,8 @@
 - [x] Gegner-Schachprüfung nach Zug (gegnerischer König bedroht)
 - [x] Patt-Erkennung (keine legalen Züge + König **nicht** im Schach)
 - [x] Schachmatt-Erkennung (keine legalen Züge + König **im** Schach)
-- [ ] En Passant (optional → falls einfach umsetzbar)
-- [ ] Rochade mit Bedingungen (König + Turm nicht bewegt, kein Schachfeld überschritten)
+- [x] En Passant (optional → falls einfach umsetzbar)
+- [x] Rochade mit Bedingungen (König + Turm nicht bewegt, kein Schachfeld überschritten)
 
 ## 🧠 Code-Struktur & Sauberkeit
 
