@@ -1,5 +1,5 @@
 package com.konstantin.chessgamejava;
-
+//gggggg
 public  class Figur {
     protected Position1 position;
     protected FigurFarbe farbe;
