@@ -44,9 +44,7 @@ public class Turm extends Figur{
                 return true;
             }
 
-
         }
-
         return false;
     }
 }
