@@ -9,7 +9,7 @@ public class Bauer extends Figur{
 
 
 
-
+// spiellogic bauer
     @Override
     public boolean isValidMove(Position1 newPosition, Figur[][] figurs) {
         if (newPosition.getZeile() < 0 || newPosition.getZeile() > 7 ||
